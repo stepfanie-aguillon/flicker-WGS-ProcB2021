@@ -1,0 +1,7 @@
+library_name,project_name,organism_name,type,paired,frag_size,frag_stddev,insert_size,insert_stddev,read_orientation,genomic_start,genomic_end
+frag_1,nofl_Assembly,C_auratus,fragment,1,180,20,,,inward,0,0
+frag_2,nofl_Assembly,C_auratus,fragment,1,180,20,,,inward,0,0
+3kb_1,nofl_Assembly,C_auratus,jumping,1,,,3000,500,outward,0,0
+3kb_2,nofl_Assembly,C_auratus,jumping,1,,,3000,500,outward,0,0
+8kb_1,nofl_Assembly,C_auratus,jumping,1,,,8000,500,outward,0,0
+8kb_2,nofl_Assembly,C_auratus,jumping,1,,,8000,500,outward,0,0
