@@ -1,0 +1,7 @@
+file_name,library_name,group_name
+seq/NOFL_SMA_180bp_S1_L001_R*.fastq,frag_1,frag1
+seq/NOFL_SMA_180bp_S1_L002_R*.fastq,frag_2,frag2
+seq/NOFL_SMA_3k_S1_L001_R*.fastq,3kb_1,jump1
+seq/NOFL_SMA_3k_S1_L002_R*.fastq,3kb_2,jump2
+seq/NOFL_SMA_8k_S2_L001_R*.fastq,8kb_1,jump3
+seq/NOFL_SMA_8k_S2_L002_R*.fastq,8kb_2,jump4
