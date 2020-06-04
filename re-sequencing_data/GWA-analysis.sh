@@ -12,7 +12,7 @@
 ### PREPARE FILES FOR GEMMA ANALYSIS ###
 
 ## rename chromosomes
-bcftools annotate --rename-chrs bcftools_rename.txt RSFL-YSFL_WGS_missing80_mindepth3.vcf.recode.vcf &> RSFL-YSFL_WGS_missing80_mindepth3_renamechr.vcf
+bcftools annotate --rename-chrs bcftools_rename.txt RSFL-YSFL_WGS_missing80_mindepth3.vcf &> RSFL-YSFL_WGS_missing80_mindepth3_renamechr.vcf
 
 ## prep beagle files
 java -Xmx96g -jar /programs/beagle4/beagle4.jar gt=/workdir/sma256/RSFL-YSFL_WGS_missing80_mindepth3_renamechr.vcf nthreads=20 out=/workdir/sma256/RSFL-YSFL_WGS_missing80_mindepth3_beagle_output
@@ -21,7 +21,7 @@ java -Xmx96g -jar /programs/beagle4/beagle4.jar gt=/workdir/sma256/RSFL-YSFL_WGS
 vcftools --gzvcf RSFL-YSFL_WGS_missing80_mindepth3_beagle_output.vcf.gz --remove-indv samplenofl1toNOFL_sorted --remove-indv samplenofl2toNOFL_sorted --remove-indv samplenofl3toNOFL_sorted --remove-indv samplenofl4toNOFL_sorted --remove-indv samplenofl5toNOFL_sorted --remove-indv samplenofl6toNOFL_sorted --remove-indv samplenofl7toNOFL_sorted --remove-indv samplenofl8toNOFL_sorted --remove-indv samplenofl9toNOFL_sorted --remove-indv samplenofl10toNOFL_sorted --remove-indv samplenofl11toNOFL_sorted --remove-indv samplenofl12toNOFL_sorted --remove-indv samplenofl13toNOFL_sorted --remove-indv samplenofl14toNOFL_sorted --remove-indv samplenofl15toNOFL_sorted --remove-indv samplenofl16toNOFL_sorted --remove-indv samplenofl17toNOFL_sorted --remove-indv samplenofl18toNOFL_sorted --remove-indv samplenofl19toNOFL_sorted --remove-indv samplenofl20toNOFL_sorted --remove-indv samplenofl21toNOFL_sorted --remove-indv samplenofl22toNOFL_sorted --remove-indv samplenofl23toNOFL_sorted --remove-indv samplenofl24toNOFL_sorted --recode --out RSFL-YSFL_WGS_missing80_mindepth3_beagle_output_HZ.vcf
 
 ## create PLINK files
-vcftools --gzvcf RSFL-YSFL_WGS_missing80_mindepth3_beagle_output_HZ.vcf.recode.vcf --plink --out RSFL-YSFL_WGS_HZ_beagle_outputPlinkformat
+vcftools --gzvcf RSFL-YSFL_WGS_missing80_mindepth3_beagle_output_HZ.vcf --plink --out RSFL-YSFL_WGS_HZ_beagle_outputPlinkformat
 
 ## make .bed files
 /programs/plink-1.9-x86_64-beta5/plink --file RSFL-YSFL_WGS_HZ_beagle_outputPlinkformat --make-bed --out /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed
