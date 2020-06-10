@@ -1,7 +1,8 @@
 # This script contains the code to assemble the reference genome used in this manuscript:
 #
 # Authors: Aguillon SM, Walsh J, Lovette IJ
-# Title:
+# Title: Extensive hybridization reveals multiple coloration genes
+#        underlying a complex plumage phenotype
 # DOI: 
 #
 # Please cite the paper if you use these scripts
