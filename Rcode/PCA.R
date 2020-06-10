@@ -20,7 +20,7 @@ library(tidyverse)
 #BiocManager::install("SNPRelate")
 
 ## set directory where VCF files are stored
-setwd("~/Desktop/reseq2020/")
+setwd("~/Desktop/reseq2020/PCA")
 
 
 ########### FULL DATASET ###########
