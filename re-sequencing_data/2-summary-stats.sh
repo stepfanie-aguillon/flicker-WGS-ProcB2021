@@ -1,8 +1,9 @@
 # This script contains the code to obtain vcftools summary stats used in the manuscript:
 #
 # Authors: Aguillon SM, Walsh J, Lovette IJ
-# Title:
-# DOI: 
+# Title: Extensive hybridization reveals multiple coloration genes
+#        underlying a complex plumage phenotype
+# DOI: 10.1101/2020.07.10.197715
 #
 # Please cite the paper if you use these scripts
 #
