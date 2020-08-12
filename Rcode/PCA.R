@@ -3,7 +3,7 @@
 # Authors: Aguillon SM, Walsh J, Lovette IJ
 # Title: Extensive hybridization reveals multiple coloration genes
 #        underlying a complex plumage phenotype
-# DOI:
+# DOI: 10.1101/2020.07.10.197715
 #
 # Please cite the paper if you use these scripts
 #
