@@ -49,17 +49,17 @@ gemma -bfile ./GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -gk 1 -miss 1 -maf 0 -r2 
 
 ## run GEMMA: univariate linear models
 #crown
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_crown &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_crown &
 #ear coverts
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 2 -o GWAS_HZ_lmm_earcoverts &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 2 -o GWAS_HZ_lmm_earcoverts &
 #throat
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 3 -o GWAS_HZ_lmm_throat &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 3 -o GWAS_HZ_lmm_throat &
 #nuchal patch
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 4 -o GWAS_HZ_lmm_nuchal &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 4 -o GWAS_HZ_lmm_nuchal &
 #wings and tail
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 5 -o GWAS_HZ_lmm_shaft &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 5 -o GWAS_HZ_lmm_shaft &
 # male malar stripe
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ_2.cXX.txt -lmm 4 -n 6 -o GWAS_HZ_lmm_malar &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 6 -o GWAS_HZ_lmm_malar &
 
 
 
@@ -70,14 +70,14 @@ gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir
 
 ## run GEMMA: univariate linear models
 #crown
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 1 -o GWAS_allindiv_lmm_crown_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_crown_randomized &
 #ear coverts
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 2 -o GWAS_allindiv_lmm_earcoverts_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 2 -o GWAS_HZ_lmm_earcoverts_randomized &
 #throat
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 3 -o GWAS_allindiv_lmm_throat_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 3 -o GWAS_HZ_lmm_throat_randomized &
 #nuchal patch
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 4 -o GWAS_allindiv_lmm_nuchal_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 4 -o GWAS_HZ_lmm_nuchal_randomized &
 #wings and tail
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 5 -o GWAS_allindiv_lmm_shaft_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 5 -o GWAS_HZ_lmm_shaft_randomized &
 #male malar stripe
-gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_beagle_output_bed -k /workdir/sma256/output/GEMMA_allindivs_2.cXX.txt -lmm 4 -n 6 -o GWAS_allindiv_lmm_malar_randomized &
+gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 6 -o GWAS_HZ_lmm_malar_randomized &
