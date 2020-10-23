@@ -12,6 +12,7 @@
 ## load packages
 library(SNPRelate)
 library(tidyverse)
+library(data.table)
 
 ## if SNPRelate needs to be installed
 #if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -169,19 +170,23 @@ pca2_scatter1_2 <- ggplot() +
 pca2_scatter1_2
 
 
+
+
+
+
+############ CORRELATIONS #############
+#######################################
+
+## correlation between PC1 and standardized phenotype score
+## PC1 is from the analysis of the full dataset
+cor.test(pca_coords_merged$pc1,pca_coords_merged$HI_stand)
+
 ## scatterplot of PC1 score versus standardized phenotype score
 PC1vHI <- ggplot() +
-  geom_point(data=pca2_coords_merged, aes(x=pc1, y=HI_stand), size=2) +
-  geom_smooth(data=pca2_coords_merged, aes(x=pc1, y=HI_stand), method="lm", formula=y~x, se=FALSE, color="#F21924") +
+  geom_point(data=pca_coords_merged, aes(x=pc1, y=HI_stand), size=2) +
+  geom_smooth(data=pca_coords_merged, aes(x=pc1, y=HI_stand), method="lm", formula=y~x, se=FALSE, color="#F21924") +
   labs(x="PC1 score", y="Phenotype score") +
   scale_y_continuous(limits=c(0, 1.0))+
   theme_classic() +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(face="bold",size=12), axis.text=element_text(size=10,color="black"))
 PC1vHI
-
-
-
-########### CORRELATION TEST ###########
-
-## correlation between PC1 and standardized phenotype score
-cor.test(pca2_coords_merged$pc1,pca_HI$HI_stand)
