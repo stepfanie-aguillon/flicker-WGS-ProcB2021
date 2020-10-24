@@ -10,7 +10,7 @@
 
 
 
-### YELLOW-SHAFTED FLICKER (COLAPTES AURATUS) GENOME ASSEMBLY
+### YELLOW-SHAFTED FLICKER (COLAPTES AURATUS AURATUS group) GENOME ASSEMBLY
 ### Sequenced 3 lanes: 1 PE library (180 bp), 1 3 kbp library, and 1 8 kbp library
 ### 3 lanes of data (one lane of multiplexed mate pair libraries and two lanes of fragment libraries)
 ##############################################################################################
@@ -303,119 +303,6 @@ cd ./pyu_contig2.maker.output
 fasta_merge -d pyu_contig2_master_datastore_index.log
 gff3_merge -d pyu_contig2_master_datastore_index.log
 
-cp ./pyu_contig2.all.gff /workdir/sma256/nofl_aligned_maker_annotation.gff
-
-##FINAL ANNOTATION FILE = nofl_aligned_maker_annotation.gff
-
-
-
-### ASSESSMENT OF GENOME ANNOTATION ###
-#######################################
-
-# assessment of zebra finch aligned reference assembly
-
-awk '{if ($3=="gene") print }' nofl_aligned_maker_annotation.gff | wc -l
-#12141
-
-awk '{if ($3=="mRNA") print }' nofl_aligned_maker_annotation.gff | wc -l
-#12141
-
-awk '{if ($3=="Protein_match") print }' nofl_aligned_maker_annotation.gff | wc -l
-#0
-
-#19443 proteins from the zebra finch (file GCF_000151805.1_Taeniopygia_guttata-3.2.4_protein.faa)
-#12141 annotated proteins in chromosome aligned genome (file nofl_aligned.all.maker.proteins.fasta)
-#62.4% of the total 19443 in zebra finch
-
-
-# check that genes BLAST to the zebra finch
-makeblastdb -in GCF_000151805.1_Taeniopygia_guttata-3.2.4_protein.faa -out zebra_prot -parse_seqids -dbtype prot
-
-blastp -num_threads 20 -db zebra_prot -query nofl_aligned.all.maker.proteins.fasta -out zebra_to_nofl_aligned.xls -evalue 1e-10 &
-#324 No hits found
-#11817 had hits
-#97.3% matched zebra finch proteins in BLAST
-
-
-
-
-
-##################################################################################
-##################################################################################
-
-# genome annotation and assessment of annotation using the non-aligned reference assembly
-
-
-
-### GENE MODELS FROM REFERENCE: MAKER ###
-#########################################
-
-# run MAKER to annotate reference
-# using the non-aligned fasta
-
-
-### FIRST RUN: ab initio gene models
-cd /workdir
-cp -rH /programs/maker /workdir
- 
-# create a working directory for your data
-# put genome fasta file in your working directory
-cd /workdir/sma256
- 
-# create configure file
-maker -CTL   
- 
-# create a tmp directory
-mkdir /workdir/tmp
-
-## Modify the maker_opts.ctl file created by the previous command
-#genome=/workdir/sma256/final.assembly.fasta
-#protein=/workdir/sma256/Taeniopygia_guttata.taeGut3.2.4.pep.all.fa  
-#rmlib=/workdir/sma256/consensi.fa
-#repeat_protein=/workdir/sma256/te_proteins.fasta
-#est2genome=1
-#protein2genome=1
-#max_dna_len=300000
-#min_contig=10000
-#TMP=/workdir/tmp 
- 
-# run MAKER
-/usr/local/mpich/bin/mpiexec -n 60 maker -fix_nucleotides
-
-
-#### SECOND RUN: first run trains this second run
-
-cd final.assembly.maker.output/
-fasta_merge -d final.assembly_master_datastore_index.log
-gff3_merge -d final.assembly_master_datastore_index.log
-
-cd /workdir/sma256/
-mkdir snap
-cd snap
-gff3_merge -d /workdir/sma256/final.assembly.maker.output/final.assembly_master_datastore_index.log
-
-maker2zff final.assembly.all.gff
-
-#now use these files to train SNAP
-
-fathom -categorize 1000 genome.ann genome.dna
-fathom -export 1000 -plus uni.ann uni.dna
-forge export.ann export.dna
-hmm-assembler.pl pyu . > ../pyu1.hmm
-cd ..
- 
-## Modify the maker_opts.ctl file from the first run
-#snaphmm=pyu1.hmm
-#est2genome=0
-#protein2genome=0
-
-#export PATH=/workdir/maker/bin
-/usr/local/mpich/bin/mpiexec -n 60 maker -base pyu_contig2 -fix_nucleotides
-
-cd ./pyu_contig2.maker.output
-fasta_merge -d pyu_contig2_master_datastore_index.log
-gff3_merge -d pyu_contig2_master_datastore_index.log
-
 cp ./pyu_contig2.all.gff /workdir/sma256/nofl_maker_annotation.gff
 
 ##FINAL ANNOTATION FILE = nofl_maker_annotation.gff
@@ -425,26 +312,26 @@ cp ./pyu_contig2.all.gff /workdir/sma256/nofl_maker_annotation.gff
 ### ASSESSMENT OF GENOME ANNOTATION ###
 #######################################
 
-# assessment of non-aligned reference assembly
+# assessment of zebra finch aligned reference assembly
 
-awk '{if ($3=="gene") print }' nofl_nonaligned_maker_annotation.gff | wc -l
-#12732
+awk '{if ($3=="gene") print }' nofl_maker_annotation.gff | wc -l
+#12141
 
-awk '{if ($3=="mRNA") print }' nofl_nonaligned_maker_annotation.gff | wc -l
-#12732
+awk '{if ($3=="mRNA") print }' nofl_maker_annotation.gff | wc -l
+#12141
 
-awk '{if ($3=="Protein_match") print }' nofl_nonaligned_maker_annotation.gff | wc -l
+awk '{if ($3=="Protein_match") print }' nofl_maker_annotation.gff | wc -l
 #0
 
-#19443 proteins from the zebrafinch (file GCF_000151805.1_Taeniopygia_guttata-3.2.4_protein.faa)
-#12732 annotated proteins in non-aligned genome (file nofl_nonaligned.all.maker.proteins.fasta)
-#65.5% of the total 19443 in zebra finch
+#19443 proteins from the zebra finch (file GCF_000151805.1_Taeniopygia_guttata-3.2.4_protein.faa)
+#12141 annotated proteins in chromosome aligned genome (file nofl.all.maker.proteins.fasta)
+#62.4% of the total 19443 in zebra finch
 
 
 # check that genes BLAST to the zebra finch
 makeblastdb -in GCF_000151805.1_Taeniopygia_guttata-3.2.4_protein.faa -out zebra_prot -parse_seqids -dbtype prot
 
-blastp -num_threads 20 -db zebra_prot -query nofl_nonaligned.all.maker.proteins.fasta -out zebra_to_nofl_nonaligned.xls -evalue 1e-10 &
-#357 No hits found
-#12375 had hits
-#97.2% matched zebra finch proteins in BLAST
+blastp -num_threads 20 -db zebra_prot -query nofl.all.maker.proteins.fasta -out zebra_to_nofl_aligned.xls -evalue 1e-10 &
+#324 No hits found
+#11817 had hits
+#97.3% matched zebra finch proteins in BLAST
