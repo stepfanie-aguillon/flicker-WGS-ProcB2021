@@ -10,7 +10,7 @@
 
 
 
-### YELLOW-SHAFTED FLICKER (COLAPTES AURATUS AURATUS group) GENOME ASSEMBLY
+### YELLOW-SHAFTED FLICKER (COLAPTES AURATUS AURATUS GROUP) GENOME ASSEMBLY
 ### Sequenced 3 lanes: 1 PE library (180 bp), 1 3 kbp library, and 1 8 kbp library
 ### 3 lanes of data (one lane of multiplexed mate pair libraries and two lanes of fragment libraries)
 ##############################################################################################
