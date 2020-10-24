@@ -16,7 +16,7 @@ library(tidyverse)
 setwd("~/Desktop/reseq2020/gene-plot/")
 
 ## load .gff file
-gff <- read.table("./nofl_aligned_maker_annotation.gff-CHRonly.txt", header=FALSE, comment.char="#", sep="\t")
+gff <- read.table("./nofl_maker_annotation.gff", header=FALSE, comment.char="#", sep="\t")
 
 
 
