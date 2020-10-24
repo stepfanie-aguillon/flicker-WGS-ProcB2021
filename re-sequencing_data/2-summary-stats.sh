@@ -17,9 +17,9 @@ vcftools --vcf RSFL-YSFL_WGS_missing80_mindepth3.vcf --out RSFL-YSFL_50kb --weir
 ## per-SNP FST
 vcftools --vcf RSFL-YSFL_WGS_missing80_mindepth3.vcf --out RSFL-YSFL_allSNPs --weir-fst-pop RSFL_indivs.txt --weir-fst-pop YSFL_indivs.txt &
 
-## fixed SNPs only
+## near fixed SNPs only
 ## obtain list of the positions of fixed SNPs from the per-SNP FST file and save as `fixed-snps-list.txt`
-vcftools --vcf RSFL-YSFL_WGS_missing80_mindepth3.vcf --positions fixed-snps-list.txt --recode &
+vcftools --vcf RSFL-YSFL_WGS_missing80_mindepth3.vcf --positions fixed-snps-list.txt --recode --out RSFL-YSFL_WGS_m80d3_fixed.vcf &
 
 ## seq depth
 vcftools --vcf RSFL-YSFL_WGS_missing80_mindepth3.vcf --out sample_seqdepth --depth &
