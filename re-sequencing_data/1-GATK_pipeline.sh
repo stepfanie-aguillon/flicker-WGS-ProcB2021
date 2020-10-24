@@ -1461,3 +1461,9 @@ java -Xmx48g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T VariantFiltration -
 # maximum missing = 20%, MAF = 5%, minimum depth = 3X, maximum depth = 50X, biallelic
 vcftools --vcf unifiedgenotyperSNPs_NOFLtoNOFL_filtered.vcf --max-missing 0.80 --maf 0.05 --min-meanDP 3 --max-meanDP 50 --min-alleles 2 --max-alleles 2 --recode --out RSFL-YSFL_WGS_missing80_mindepth3.vcf &
 #After filtering, kept 8495326 out of a possible 53642328 Sites
+
+#### IMPORTANT!!! 
+#### NOTE THAT THE ABOVE COMMAND INCLUDES AN ERROR
+#### We inadvertently left out the command to *remove* the hard filters
+#### To correctly filter out the hard filters, use the following command:
+vcftools --vcf unifiedgenotyperSNPs_NOFLtoNOFL_filtered.vcf --remove-filtered-all --max-missing 0.80 --maf 0.05 --min-meanDP 3 --max-meanDP 50 --min-alleles 2 --max-alleles 2 --recode --out RSFL-YSFL_WGS_missing80_mindepth3.vcf &
