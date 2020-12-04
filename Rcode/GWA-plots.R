@@ -69,6 +69,7 @@ write.table(SNPs_shaft_P7, "./SNP_list/pseudo_shaft_P7.txt", row.names=FALSE, qu
 #######################################
 
 ## load file to rename long chromosome names
+
 chr <- read.table("./chr_rename.txt", header=TRUE)
 colnames(chr) <- c("CHROM", "CHR_NUM")
 
@@ -83,15 +84,12 @@ snp <- read.table("./HZ_combined_SNPlist.txt", header=TRUE)
 SNPs_merge <- merge(fst, chr, by="CHROM")
 GWA_FST_merge <- merge(snp, SNPs_merge, by=c("CHR_NUM", "ps"))
 
-## transform negative FST to 0
-GWA_FST_merge$FST_scaled <- ifelse(GWA_FST_merge$FST<0, 0, GWA_FST_merge$FST)
-
 ## write output table
 #write.table(GWA_FST_merge, "./FST_GWA_SNPs.txt", quote=FALSE, sep="\t", row.names=FALSE)
 
 ## plot figure
 hist_plot <- ggplot() +
-  geom_histogram(data=GWA_FST_merge, aes(x=FST_scaled), binwidth=0.05) +
+  geom_histogram(data=GWA_FST_merge, aes(x=WEIR_AND_COCKERHAM_FST), binwidth=0.05) +
   labs(x="FST", y="Count") +
   theme_classic() +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(face="bold",size=12), axis.text=element_text(size=10,color="black"))
