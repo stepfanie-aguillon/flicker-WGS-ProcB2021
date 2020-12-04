@@ -10,7 +10,6 @@
 
 
 ## load packages
-library(SNPRelate)
 library(tidyverse)
 library(gridExtra)
 
@@ -42,17 +41,17 @@ FST_25kb_plot  <- FST_25kb_plot %>%
 
 
 ## load GWA results from GEMMA
-shaft_GWAS <- read.table("~/Desktop/reseq2020/GWA/results_files_forfig/GWAS_lmm_shaft_forfig.txt", header=TRUE)
-earcoverts_GWAS <- read.table("~/Desktop/reseq2020/GWA/results_files_forfig/GWAS_lmm_earcoverts_forfig.txt", header=TRUE)
-nuchal_GWAS <- read.table("~/Desktop/reseq2020/GWA/results_files_forfig/GWAS_lmm_nuchal_forfig.txt", header=TRUE)
-malar_GWAS <- read.table("~/Desktop/reseq2020/GWA/results_files_forfig/GWAS_lmm_malar_forfig.txt", header=TRUE)
+shaft_GWAS <- read.table("./GWAS/GWAS_lmm_shaft_forfig.txt", header=TRUE)
+earcoverts_GWAS <- read.table("./GWAS/GWAS_lmm_earcoverts_forfig.txt", header=TRUE)
+nuchal_GWAS <- read.table("./GWAS/GWAS_lmm_nuchal_forfig.txt", header=TRUE)
+malar_GWAS <- read.table("./GWAS/GWAS_lmm_malar_forfig.txt", header=TRUE)
 
 
 ## colors used in figures
-#shaft_GWAS == "#ca0020" #dk red
-#malar_GWAS == "#92c5de" #light blue
-#earcoverts_GWAS == "#f1a340" #light orange
-#nuchal_GWAS == "#998ec3" #light purple
+#shaft_GWAS == "#ca0020" #red
+#malar_GWAS == "#92c5de" #blue
+#earcoverts_GWAS == "#f1a340" #orange
+#nuchal_GWAS == "#998ec3" #purple
 
 
 
@@ -64,11 +63,10 @@ malar_GWAS <- read.table("~/Desktop/reseq2020/GWA/results_files_forfig/GWAS_lmm_
 ## GENE = EED
 ## CHROMOSOME = 1
 ## 5kb windows
-## earcoverts, nuchal
+## nuchal
 
 chr1_fst_GWAS <- ggplot() +
-  geom_point(data=filter(earcoverts_GWAS, CHROM==1), aes(x=ps, y=logP), alpha=0.3, color="#f1a340", size=1) + #ear coverts GWA, light orange
-  geom_point(data=filter(nuchal_GWAS, CHROM==1), aes(x=ps, y=logP), alpha=0.3, color="#998ec3", size=1) + #nuchal patch GWA, light purple
+  geom_point(data=filter(nuchal_GWAS, CHROM==1), aes(x=ps, y=logP), alpha=0.4, color="#998ec3", size=1) + 
   geom_line(data=filter(FST_5kb_plot, CHR==1), aes(x=BIN_START, y=WEIGHTED_FST*10)) + #fst line
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) + #add second axis for FST
   labs(x="Chr 1 position (Mb)", y="-log(P)") +
@@ -90,13 +88,11 @@ gA <- ggplotGrob(chr1_fst_GWAS)
 ## GENE = PLCB1,PLCB4
 ## CHROMOSOME = 3
 ## 25kb windows
-## earcoverts, nuchal, malar, wings and tail
+## malar, wing and tail
 
 chr3_fst_GWAS <- ggplot() +
-  geom_point(data=filter(shaft_GWAS, CHROM==3), aes(x=ps, y=logP), alpha=0.1, color="#ca0020", size=1) +
-  geom_point(data=filter(malar_GWAS, CHROM==3), aes(x=ps, y=logP), alpha=0.3, color="#92c5de", size=1) +
-  geom_point(data=filter(earcoverts_GWAS, CHROM==3), aes(x=ps,  y=logP), alpha=0.1, color="#f1a340", size=1) +
-  geom_point(data=filter(nuchal_GWAS, CHROM==3), aes(x=ps, y=logP), alpha=0.1, color="#998ec3", size=1) +
+  geom_point(data=filter(malar_GWAS, CHROM==3), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +
+  geom_point(data=filter(shaft_GWAS, CHROM==3), aes(x=ps, y=logP), alpha=0.2, color="#ca0020", size=1) +
   geom_line(data=filter(FST_25kb_plot, CHR==3), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Chr 3 position (Mb)", y="-log(P)") +
@@ -123,9 +119,10 @@ gB <- ggplotGrob(chr3_fst_GWAS)
 ## GENE = CYP2J19
 ## CHROMOSOME = 8
 ## 5kb windows
-## wings and tail
+## malar, wing and tail
 
 chr8_fst_GWAS <- ggplot() +
+  geom_point(data=filter(malar_GWAS, CHR_NUM==8), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +
   geom_point(data=filter(shaft_GWAS, CHROM==8), aes(x=ps, y=logP), alpha=0.2, color="#ca0020", size=1) +
   geom_line(data=filter(FST_5kb_plot, CHR==8), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
@@ -142,12 +139,13 @@ gC <- ggplotGrob(chr8_fst_GWAS)
 
 
 
-## GENE = CAMKV, SEMA3B
+## GENE = SEMA3B
 ## CHROMOSOME = 12
 ## 25kb windows
-## wings and tail
+## nuchal, wing and tail
 
 chr12_fst_GWAS <- ggplot() +
+  geom_point(data=filter(nuchal_GWAS, CHR_NUM==12), aes(x=ps, y=logP), alpha=0.4, color="#998ec3", size=1) + 
   geom_point(data=filter(shaft_GWAS, CHROM==12), aes(x=ps, y=logP), alpha=0.2, color="#ca0020", size=1) +
   geom_line(data=filter(FST_25kb_plot, CHR==12), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
@@ -160,7 +158,7 @@ chr12_fst_GWAS <- ggplot() +
   geom_segment(aes(x=4432029, y=-1, xend=4434700, yend=-1), size=3) +
   geom_segment(aes(x=4380555, y=-1, xend=4404607, yend=-1), size=3) +
   geom_segment(aes(x=4424975, y=-1, xend=4429142, yend=-1), size=3) +
-  geom_segment(aes(x=4408401, y=-1, xend=4411181, yend=-1), size=6, color="#f21924") + #CAMK1 CAMKV
+  geom_segment(aes(x=4408401, y=-1, xend=4411181, yend=-1), size=3) + 
   geom_segment(aes(x=4241380, y=-1, xend=4250558, yend=-1), size=3) +
   geom_segment(aes(x=4257610, y=-1, xend=4268946, yend=-1), size=3) +
   geom_segment(aes(x=4236711, y=-1, xend=4237937, yend=-1), size=3) +
@@ -177,7 +175,7 @@ chr12_fst_GWAS <- ggplot() +
   geom_segment(aes(x=4164499, y=-1, xend=4165241, yend=-1), size=3) +
   geom_segment(aes(x=4707979, y=-1, xend=4900226, yend=-1), size=3) +
   geom_segment(aes(x=4631946, y=-1, xend=4670685, yend=-1), size=3) +
-  geom_segment(aes(x=4525217, y=-1, xend=4530903, yend=-1), size=6, color="#f21924") + #SEMA
+  geom_segment(aes(x=4525217, y=-1, xend=4530903, yend=-1), size=6, color="#f21924") + #SEMA3B
   geom_segment(aes(x=4437364, y=-1, xend=4498200, yend=-1), size=3) +
   geom_segment(aes(x=4690407, y=-1, xend=4695413, yend=-1), size=3) +
   geom_segment(aes(x=4682006, y=-1, xend=4689004, yend=-1), size=3) +
@@ -191,11 +189,11 @@ gD <- ggplotGrob(chr12_fst_GWAS)
 ## GENE = MFSD12
 ## CHROMOSOME = 28
 ## 5kb windows
-## wings and tail, ear coverts
+## wing and tail, ear coverts
 
-chr28_fst_GWAS2 <- ggplot() +
-  geom_point(data=filter(shaft_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.3, color="#ca0020", size=1) +
-  geom_point(data=filter(earcoverts_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.2, color="#f1a340", size=1) +
+chr28_fst_GWAS1 <- ggplot() +
+  geom_point(data=filter(shaft_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.4, color="#ca0020", size=1) +
+  geom_point(data=filter(earcoverts_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.4, color="#f1a340", size=1) +
   geom_line(data=filter(FST_5kb_plot, CHR==28), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Chr 28 position (Mb)", y="-log(P)") +
@@ -238,7 +236,7 @@ chr28_fst_GWAS2 <- ggplot() +
   geom_segment(aes(x=925315, y=-1, xend=926016, yend=-1), size=3) +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(size=10), axis.text=element_text(color="black",size=8))
 
-gE <- ggplotGrob(chr28_fst_GWAS2)
+gE <- ggplotGrob(chr28_fst_GWAS1)
 
 
 
@@ -247,9 +245,9 @@ gE <- ggplotGrob(chr28_fst_GWAS2)
 ## 25kb windows
 ## malar, wings and tail
 
-chr28_fst_GWAS <- ggplot() +
+chr28_fst_GWAS2 <- ggplot() +
+  geom_point(data=filter(malar_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +  
   geom_point(data=filter(shaft_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.2, color="#ca0020", size=1) +
-  geom_point(data=filter(malar_GWAS, CHROM==28), aes(x=ps, y=logP), alpha=0.3, color="#92c5de", size=1) +
   geom_line(data=filter(FST_25kb_plot, CHR==28), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10,name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Chr 28 position (Mb)", y="-log(P)") +
@@ -306,7 +304,7 @@ chr28_fst_GWAS <- ggplot() +
   geom_segment(aes(x=3820048, y=-1, xend=3828144, yend=-1), size=3) +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(size=10), axis.text=element_text(color="black",size=8))
 
-gF <- ggplotGrob(chr28_fst_GWAS)
+gF <- ggplotGrob(chr28_fst_GWAS2)
 
 
 
@@ -316,7 +314,7 @@ gF <- ggplotGrob(chr28_fst_GWAS)
 ## malar
 
 chrZ1_fst_GWAS <- ggplot() +
-  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.3, color="#92c5de", size=1) +
+  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +
   geom_line(data=filter(FST_5kb_plot, CHR==32), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Z Chr position (Mb)", y="-log(P)") +
@@ -340,7 +338,7 @@ gG <- ggplotGrob(chrZ1_fst_GWAS)
 ## malar
 
 chrZ2_fst_GWAS <- ggplot() +
-  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.3, color="#92c5de", size=1) +
+  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +
   geom_line(data=filter(FST_25kb_plot, CHR==32), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Z Chr position (Mb)", y="-log(P)") +
@@ -367,7 +365,7 @@ gH <- ggplotGrob(chrZ2_fst_GWAS)
 ## malar
 
 chrZ3_fst_GWAS <- ggplot() +
-  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.3, color="#92c5de", size=1) +
+  geom_point(data=filter(malar_GWAS, CHROM==32), aes(x=ps, y=logP), alpha=0.4, color="#92c5de", size=1) +
   geom_line(data=filter(FST_5kb_plot, CHR==32), aes(x=BIN_START, y=WEIGHTED_FST*10)) +
   scale_y_continuous(sec.axis=sec_axis(~./10, name="FST", breaks=c(0.0,0.25,0.50,0.75,1.00)), breaks=c(0,2,4,6,8,10), limits=c(-1.5,11)) +
   labs(x="Z Chr position (Mb)", y="-log(P)") +
