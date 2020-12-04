@@ -93,7 +93,7 @@ pca_scatter1_2 <- ggplot() +
   geom_hline(aes(yintercept=0), color="gray") +
   geom_vline(aes(xintercept=0), color="gray") +
   geom_point(data=pca_coords_merged, aes(x=pc1, y=pc2, fill=taxa), size=4, alpha=0.75, shape=21, stroke=0.2) +
-  labs(x="PC1 (2.02%)", y="PC2 (1.76%)") +
+  labs(x="PC1 (2.07%)", y="PC2 (1.76%)") +
   scale_fill_manual(values=fig_colors) +
   theme_classic() +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(face="bold",size=12), axis.text=element_text(size=10,color="black"))
@@ -104,7 +104,7 @@ pca_scatter3_4 <- ggplot() +
   geom_hline(aes(yintercept=0), color="gray") +
   geom_vline(aes(xintercept=0), color="gray") +
   geom_point(data=pca_coords_merged, aes(x=pc3, y=pc4, fill=taxa), size=4, alpha=0.75, shape=21, stroke=0.2) +
-  labs(x="PC3 (1.69%)", y="PC4 (1.67%)") +
+  labs(x="PC3 (1.68%)", y="PC4 (1.65%)") +
   scale_fill_manual(values=fig_colors) +
   theme_classic() +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(face="bold",size=12), axis.text=element_text(size=10,color="black"))
@@ -162,7 +162,7 @@ pca2_scatter1_2 <- ggplot() +
   geom_hline(aes(yintercept=0), color="gray") +
   geom_vline(aes(xintercept=0), color="gray") +
   geom_point(data=pca2_coords_merged, aes(x=pc1, y=pc2, fill=HI_stand), size=4, alpha=0.75, shape=21, stroke=0.2) +
-  labs(x="PC1 (55.53%)", y="PC2 (7.29%)") +
+  labs(x="PC1 (55.56%)", y="PC2 (7.31%)") +
   # colors points along a gradient from yellow (FFFF00) to red (F21924)
   scale_fill_gradient(low="#FFFF00", high="#F21924") +
   theme_classic() +
