@@ -13,6 +13,8 @@
 library(SNPRelate)
 library(tidyverse)
 library(data.table)
+library(grid)
+library(gridExtra)
 
 ## if SNPRelate needs to be installed
 #if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -190,3 +192,71 @@ PC1vHI <- ggplot() +
   theme_classic() +
   theme(legend.position="none", axis.line=element_line(color="black"), axis.title=element_text(face="bold",size=12), axis.text=element_text(size=10,color="black"))
 PC1vHI
+
+
+## correlation between PC1 and each individual phenotypic trait
+## PC1 is from the analysis of the full dataset
+# crown
+cor.test(pca_coords_merged$pc1,pca_coords_merged$crown)
+# ear coverts
+cor.test(pca_coords_merged$pc1,pca_coords_merged$ear)
+# nuchal patch
+cor.test(pca_coords_merged$pc1,pca_coords_merged$nuchal)
+# wing and tail
+cor.test(pca_coords_merged$pc1,pca_coords_merged$shaft)
+# throat
+cor.test(pca_coords_merged$pc1,pca_coords_merged$throat)
+# male malar stripe
+cor.test(pca_coords_merged$pc1,pca_coords_merged$malar)
+
+
+## scatterplots of PC1 score versus each individual phenotypic trait
+shaft <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=shaft),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=shaft),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Wing and tail score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_blank(),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+nuchal <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=nuchal),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=nuchal),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Nuchal score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_blank(),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+crown <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=crown),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=crown),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Crown score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_blank(),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+ear <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=ear),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=ear),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Ear coverts score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_blank(),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+throat <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=throat),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=throat),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Throat score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_text(face="bold",size=10),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+malar <- ggplot() +
+  geom_point(data=pca_coords_merged,aes(x=pc1,y=malar),size=2) +
+  geom_smooth(data=pca_coords_merged,aes(x=pc1,y=malar),method="lm",formula=y~x,se=FALSE,color="#F21924") +
+  labs(x = "PC1 score", y = "Malar score") +
+  scale_y_continuous(limits=c(0,4))+
+  theme_classic() + 
+  theme(legend.position="none",axis.line.x=element_line(color="black"),axis.line.y=element_line(color="black"),  axis.title.x=element_text(face="bold",size=10),axis.title.y=element_text(face="bold",size=10),axis.text=element_text(size=8))
+
+grid.arrange(shaft,nuchal,crown,ear,throat,malar,nrow=3)
