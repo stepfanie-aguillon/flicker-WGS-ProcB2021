@@ -44,8 +44,8 @@ vcftools --gzvcf RSFL-YSFL_WGS_missing80_mindepth3_beagle_output_HZ.vcf --plink 
 
 ## generate relatedness matrix
 gemma -bfile ./GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -gk 1 -miss 1 -maf 0 -r2 1 -hwe 0 -o ./GEMMA_HZ
-## number of total SNPs = 8495326
-## number of analyzed SNPs = 8489993
+## number of total SNPs/var        =  7233334
+## number of analyzed SNPs         =  7228819
 
 
 ## run GEMMA: univariate linear models
