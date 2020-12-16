@@ -37,8 +37,8 @@ FST_RY_25kb <- read.table("./RSFL-YSFL_25kb.windowed.weir.fst", header=TRUE)
 ########### SUMMARY ###########
 
 ## per SNP summaries
-mean(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #mean = 0.007052154
-median(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #median = -0.0130106
+mean(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #mean = 0.00801046
+median(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #median = -0.0120217
 min(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #min = -0.323529
 max(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #max = 1
 
@@ -47,25 +47,25 @@ max(na.omit(FST_RY_allsnps$WEIR_AND_COCKERHAM_FST)) #max = 1
 all_SNPs <- left_join(FST_RY_allsnps, chr_rename, by="CHROM")
 
 Z_chr <- filter(all_SNPs, CHR==32)
-mean(na.omit(Z_chr$WEIR_AND_COCKERHAM_FST)) #Z mean = 0.02593946
+mean(na.omit(Z_chr$WEIR_AND_COCKERHAM_FST)) #Z mean = 0.04127816
 
 non_Z <- filter(all_SNPs, CHR != 32)
-mean(na.omit(non_Z$WEIR_AND_COCKERHAM_FST)) #autosome mean = 0.006291134
+mean(na.omit(non_Z$WEIR_AND_COCKERHAM_FST)) #autosome mean = 0.007136985
 
 
 ## identify fixed and near-fixed SNPs
 
 # FST = 1
-fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST==1) #total = 790
-790/8495326*100 #percent of all SNPs = 0.009299231%
+fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST==1) #total = 780
+780/7233334*100 #percent of all SNPs = 0.01078341%
 #write.table(fixed_snps, "./fixed_snps.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 # FST > 0.95
-near_fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST>=0.95) #total = 790
+near_fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST>=0.95) #total = 780
 
 # FST > 0.90
-less_near_fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST>=0.90) #total = 2202
-2202/8495326*100 #percent of all SNPs = 0.02592014%
+less_near_fixed_snps <- filter(FST_RY_allsnps, WEIR_AND_COCKERHAM_FST>=0.90) #total = 2156
+2156/7233333*100 #percent of all SNPs = 0.02980645%
 #write.table(less_near_fixed_snps, "./less_near_fixed_snps.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 
@@ -88,39 +88,6 @@ manhattan(FST_RY_25kb_plot_clean, chr="CHR", bp="BIN_START", p="WEIGHTED_FST", l
 
 
 
-########### HETEROZYGOSITY ###########
-######################################
-
-## load sample info
-sample_info <- read.table("./sample_info.txt", sep="\t", header=TRUE)
-
-## load heterozygosity output from VCFtools
-sample_het <- read.table("./sample_het.het", header=TRUE)
-
-## merge datafiles
-het_merge <- merge(sample_het, sample_info, by.x="INDV", by.y="ID")
-
-## summary for red-shafted flickers
-het_RSFL <- filter(het_merge, taxa=="RSFL")
-mean(het_RSFL$F) #0.362952
-min(het_RSFL$F) #0.22151
-max(het_RSFL$F) #0.51591
-
-## summary for yellow-shafted flickers
-het_YSFL <- filter(het_merge, taxa=="YSFL")
-mean(het_YSFL$F) #0.397891
-min(het_YSFL$F) #0.13039
-max(het_YSFL$F) #0.6053
-
-## summary for hybrid zone individuals
-het_INT <- filter(het_merge, taxa=="INT")
-mean(het_INT$F) #0.3114923
-min(het_INT$F) #-0.10307
-max(het_INT$F) #0.78319
-
-
-
-
 
 ########### SEQ DEPTH ###########
 #################################
@@ -135,6 +102,17 @@ sample_seqdepth <- read.table("./sample_seqdepth.idepth", header=TRUE)
 depth_merge <- merge(sample_seqdepth, sample_info, by.x="INDV", by.y="ID")
 
 ## summary for all samples
-mean(depth_merge$MEAN_DEPTH) #5.802874
-min(depth_merge$MEAN_DEPTH) #1.98456
-max(depth_merge$MEAN_DEPTH) #15.1207
+mean(depth_merge$MEAN_DEPTH) #4.100699
+min(depth_merge$MEAN_DEPTH) #1.61558
+max(depth_merge$MEAN_DEPTH) #11.3719
+
+## summary separated by taxa
+stats <- group_by(depth_merge,taxa) %>%
+  summarize(mean = mean(MEAN_DEPTH), max = max(MEAN_DEPTH), min = min(MEAN_DEPTH))
+
+stats
+#taxa   mean   max   min
+#<fct> <dbl> <dbl> <dbl>
+#  1 INT    4.37 11.4   1.62
+#2 RSFL   3.41  4.29  2.62
+#3 YSFL   3.48  5.80  2.37
