@@ -13,6 +13,7 @@
 ### PREPARE FILES FOR GEMMA ANALYSIS ###
 
 ## rename chromosomes
+# bcftools_rename.txt is provided, this command renames long chromosome names outputted by Satsuma
 bcftools annotate --rename-chrs bcftools_rename.txt RSFL-YSFL_WGS_missing80_mindepth3.vcf &> RSFL-YSFL_WGS_missing80_mindepth3_renamechr.vcf
 
 ## prep beagle files
@@ -48,6 +49,7 @@ gemma -bfile ./GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -gk 1 -miss 1 -maf 0 -r2 
 
 
 ## run GEMMA: univariate linear models
+## -lmm 4 performs three tests: Wald test (-lmm 1), likelihood ratio test (-lmm 2), score test (-lmm 3)
 #crown
 gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir/sma256/output/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_crown &
 #ear coverts
@@ -67,6 +69,7 @@ gemma -bfile /workdir/sma256/GWAS_RSFL-YSFL_WGS_HZ_beagle_output_bed -k /workdir
 ### RANDOMIZED ANALYSES ###
 
 ## randomize phenotypes in .fam file and repeat analysis
+# the overall phenotype scores were randomized across individuals
 
 ## run GEMMA: univariate linear models
 #crown
