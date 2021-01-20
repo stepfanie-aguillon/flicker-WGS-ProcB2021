@@ -1,9 +1,11 @@
-# This script contains the R code to make PCA plots used in the manuscript:
+# This script contains the code to produce the re-sequencing data used in this manuscript:
 #
 # Authors: Aguillon SM, Walsh J, Lovette IJ
+# Year: 2021
 # Title: Extensive hybridization reveals multiple coloration genes
 #        underlying a complex plumage phenotype
-# DOI: 10.1101/2020.07.10.197715
+# Journal Info: Proceedings of the Royal Society B, 288, 20201805
+# DOI: 10.1098/rspb.2020.1805
 #
 # Please cite the paper if you use these scripts
 #
