@@ -1,4 +1,4 @@
-# This script contains the code to produce the re-sequencing data used in this manuscript:
+# This script contains the code to assemble the reference genome used in this manuscript:
 #
 # Authors: Aguillon SM, Walsh J, Lovette IJ
 # Year: 2021
