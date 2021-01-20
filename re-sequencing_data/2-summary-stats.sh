@@ -1,4 +1,4 @@
-# This script contains the code to produce the re-sequencing data used in this manuscript:
+# This script contains the code to obtain vcftools summary stats used in the manuscript:
 #
 # Authors: Aguillon SM, Walsh J, Lovette IJ
 # Year: 2021
