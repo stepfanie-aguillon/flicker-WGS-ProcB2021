@@ -7,4 +7,4 @@ Aguillon SM, Walsh J, Lovette IJ. 2021. Extensive hybridization reveals multiple
 
 Data is available from the Dryad Digital Repository: http://dx.doi.org/10.5061/dryad.7wm37pvrj
 
-If you use these scripts, please cite the paper. Sequence data files will be available upon manuscript publication.
+If you use these scripts, please cite the paper.
